@@ -1,9 +1,12 @@
 import pandas as pd
 from sklearn.preprocessing import MinMaxScaler
 import pickle
+from receber_dados import preencher, eh_categorica, eh_normal
 
 #carregar dataset
-dados = pd.read_csv('HousingData.csv', sep=',') #são somente dados numéricos
+dados = pd.read_csv('HousingData.csv', sep=',')
+
+dados = preencher(dados) #preencher NaN
 
 #NORMALIZAÇÃO
 
@@ -17,7 +20,7 @@ dados_norm = normalizador.transform(dados) #normalizar os dados
 
 #converter a matriz numérica dados_norm em DataFrame
 
-dados_dataframe = pd.DataFrame(dados_norm, columns=dados.columns).fillna(0)
+dados_dataframe = pd.DataFrame(dados_norm, columns=dados.columns)
 
 #HIPERPARAMETRIZAÇÃO - Determinar o número ótimos de clusters antes do treinamento
 
